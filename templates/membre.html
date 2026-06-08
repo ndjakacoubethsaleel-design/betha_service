@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2 style="color:#1a1a2e; margin-bottom:30px;">Bonjour {{ user.nom }} 👋</h2>
+
+<div style="display:flex; gap:20px; flex-wrap:wrap;">
+    <div style="background:white; padding:25px; border-radius:10px; flex:1; border-top:4px solid #c0392b;">
+        <h3>📈 Conseil du jour</h3>
+        <p style="margin-top:10px; color:#666;">Diversifiez toujours vos investissements. Ne mettez jamais tous vos œufs dans le même panier.</p>
+    </div>
+    <div style="background:white; padding:25px; border-radius:10px; flex:1; border-top:4px solid #c0392b;">
+        <h3>💡 Stratégie gagnante</h3>
+        <p style="margin-top:10px; color:#666;">Investissez régulièrement de petites sommes plutôt qu'une grande somme une seule fois.</p>
+    </div>
+    <div style="background:white; padding:25px; border-radius:10px; flex:1; border-top:4px solid #c0392b;">
+        <h3>⚠️ Règle d'or</h3>
+        <p style="margin-top:10px; color:#666;">N'investissez jamais de l'argent que vous ne pouvez pas vous permettre de perdre.</p>
+    </div>
+</div>
+
+<div style="background:white; padding:25px; border-radius:10px; margin-top:20px;">
+    <h3>📊 Les 5 meilleurs investissements 2026</h3>
+    <ol style="margin-top:15px; color:#666; line-height:2;">
+        <li>Actions technologiques (IA, cloud)</li>
+        <li>Immobilier locatif</li>
+        <li>Obligations d'État</li>
+        <li>ETF indiciels</li>
+        <li>Épargne en dollars ou euros</li>
+    </ol>
+</div>
+{% endblock %}

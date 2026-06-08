@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BETHA-SERVICE</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: Arial, sans-serif; background: #f4f4f4; }
+        nav { background: #1a1a2e; padding: 15px 30px; display: flex; justify-content: space-between; align-items: center; }
+        nav h1 { color: #c0392b; font-size: 22px; }
+        nav a { color: white; text-decoration: none; margin-left: 20px; }
+        nav a:hover { color: #c0392b; }
+        .container { max-width: 1000px; margin: 40px auto; padding: 0 20px; }
+        .btn { background: #c0392b; color: white; padding: 10px 25px; border: none; border-radius: 5px; cursor: pointer; text-decoration: none; }
+        .btn:hover { background: #a93226; }
+    </style>
+</head>
+<body>
+    <nav>
+        <h1>🔥 BETHA-SERVICE</h1>
+        <div>
+            <a href="/">Accueil</a>
+            {% if current_user.is_authenticated %}
+                <a href="/membre">Mon Espace</a>
+                <a href="/deconnexion">Déconnexion</a>
+            {% else %}
+                <a href="/inscription">Inscription</a>
+                <a href="/connexion">Connexion</a>
+            {% endif %}
+        </div>
+    </nav>
+    <div class="container">
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                    <p style="color:red; margin:10px 0;">{{ message }}</p>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        {% block content %}{% endblock %}
+    </div>
+</body>
+</html>

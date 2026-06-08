@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block content %}
+<div style="max-width:400px; margin:0 auto; background:white; padding:40px; border-radius:10px;">
+    <h2 style="color:#1a1a2e; margin-bottom:25px; text-align:center;">Créer un compte</h2>
+    <form method="POST">
+        <div style="margin-bottom:15px;">
+            <label>Nom complet</label><br>
+            <input type="text" name="nom" required
+                style="width:100%; padding:10px; margin-top:5px; border:1px solid #ddd; border-radius:5px;">
+        </div>
+        <div style="margin-bottom:15px;">
+            <label>Email</label><br>
+            <input type="email" name="email" required
+                style="width:100%; padding:10px; margin-top:5px; border:1px solid #ddd; border-radius:5px;">
+        </div>
+        <div style="margin-bottom:25px;">
+            <label>Mot de passe</label><br>
+            <input type="password" name="mot_de_passe" required
+                style="width:100%; padding:10px; margin-top:5px; border:1px solid #ddd; border-radius:5px;">
+        </div>
+        <button type="submit" class="btn" style="width:100%;">S'inscrire</button>
+    </form>
+    <p style="text-align:center; margin-top:15px;">
+        Déjà un compte ? <a href="/connexion" style="color:#c0392b;">Se connecter</a>
+    </p>
+</div>
+{% endblock %}
