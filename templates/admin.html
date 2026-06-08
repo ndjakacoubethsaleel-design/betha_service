@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2 style="color:#1a1a2e; margin-bottom:20px;">🟢 Membres connectés en ce moment</h2>
+{% if users %}
+<table style="width:100%; background:white; border-radius:10px; border-collapse:collapse;">
+    <tr style="background:#1a1a2e; color:white;">
+        <th style="padding:15px;">Nom</th>
+        <th style="padding:15px;">Email</th>
+    </tr>
+    {% for user in users %}
+    <tr style="border-bottom:1px solid #ddd; text-align:center;">
+        <td style="padding:15px;">{{ user.nom }}</td>
+        <td style="padding:15px;">{{ user.email }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% else %}
+<p style="color:#666;">Aucun membre connecté en ce moment.</p>
+{% endif %}
+{% endblock %}

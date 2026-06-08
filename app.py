@@ -26,6 +26,7 @@ class User(UserMixin, db.Model):
     email = db.Column(db.String(100), unique=True)
     mot_de_passe = db.Column(db.String(200))
     verifie = db.Column(db.Boolean, default=False)
+    en_ligne = db.Column(db.Boolean, default=False)
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -46,14 +47,12 @@ def inscription():
         session['nom'] = nom
         session['email'] = email
         session['mdp'] = mdp
-        print(f"Code généré: {code}")
         try:
             msg = Message('Code de vérification BETHA-SERVICE',
                           sender='ndjakacoubethsaleel@gmail.com',
                           recipients=[email])
             msg.body = f'Bonjour {nom},\n\nVotre code de vérification est : {code}\n\nBETHA-SERVICE'
             mail.send(msg)
-            print("Email envoyé avec succès")
         except Exception as e:
             print(f"Erreur email: {e}")
         return redirect(url_for('verifier'))
@@ -64,8 +63,6 @@ def verifier():
     if request.method == 'POST':
         code_entre = request.form['code'].strip()
         code_session = session.get('code', '')
-        print(f"Code entré: {code_entre}")
-        print(f"Code session: {code_session}")
         if code_entre == code_session:
             user = User(nom=session['nom'], email=session['email'],
                        mot_de_passe=session['mdp'], verifie=True)
@@ -83,6 +80,8 @@ def connexion():
         mdp = request.form['mot_de_passe']
         user = User.query.filter_by(email=email).first()
         if user and check_password_hash(user.mot_de_passe, mdp):
+            user.en_ligne = True
+            db.session.commit()
             login_user(user)
             return redirect(url_for('membre'))
         flash('Email ou mot de passe incorrect')
@@ -96,8 +95,15 @@ def membre():
 @app.route('/deconnexion')
 @login_required
 def deconnexion():
+    current_user.en_ligne = False
+    db.session.commit()
     logout_user()
     return redirect(url_for('accueil'))
+
+@app.route('/admin')
+def admin():
+    connectes = User.query.filter_by(en_ligne=True).all()
+    return render_template('admin.html', users=connectes)
 
 if __name__ == '__main__':
     with app.app_context():
